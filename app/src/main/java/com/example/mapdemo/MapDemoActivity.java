@@ -84,6 +84,7 @@ public class MapDemoActivity extends AppCompatActivity {
                 @Override
                 public void onMapReady(GoogleMap map) {
                     loadMap(map);
+                    map.setInfoWindowAdapter(new CustomWindowAdapter(getLayoutInflater()));
                     map.setMapType(MAP_TYPE_SATELLITE);
                 }
             });
@@ -148,6 +149,9 @@ public class MapDemoActivity extends AppCompatActivity {
                                 .title(title)
                                 .snippet(snippet)
                                 .icon(customMarker));
+
+                        dropPinEffect(marker);
+
                     }
                 });
 
@@ -170,12 +174,14 @@ public class MapDemoActivity extends AppCompatActivity {
                         // Animate marker using drop effect
                         // --> Call the dropPinEffect method here
                         dropPinEffect(marker);
+                        Log.d("Drop pin effect", "woohoo");
                     }
                 });
 
         // Display the dialog
         alertDialog.show();
     }
+
 
     private void dropPinEffect(final Marker marker) {
         // Handler allows us to repeat a code block after a specified delay
